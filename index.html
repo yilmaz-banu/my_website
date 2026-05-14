@@ -50,12 +50,14 @@
               "100%": { transform: "translateX(-50%)" },
             },
             cardFloat: { "0%, 100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-16px)" } },
+            softFloat: { "0%, 100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-8px)" } },
           },
           animation: {
             fadeUp: "fadeUp 0.9s ease-out both",
             floatSoft: "floatSoft 6s ease-in-out infinite",
             projectMarquee: "projectMarquee 34s linear infinite",
             cardFloat: "cardFloat 4s ease-in-out infinite",
+            softFloat: "softFloat 5s ease-in-out infinite",
           },
           boxShadow: {
             editorial: "0 35px 90px rgba(74, 59, 48, 0.14)",
@@ -252,17 +254,17 @@
         </div>
 
         <div class="relative min-h-[580px]">
-          <div
-            class="absolute right-2 top-0 h-[34rem] w-[19rem] bg-[linear-gradient(135deg,#ded6cd,#b8aa9e)] shadow-editorial animate-floatSoft dark:bg-[linear-gradient(135deg,#1f1f1f,#4a423c)] dark:shadow-night transition-all duration-700 ease-out hover:-translate-y-4 hover:-rotate-2 hover:scale-105 z-10 hover:z-50">
+          <div style="animation-delay: 0s"
+            class="absolute right-2 top-0 h-[34rem] w-[19rem] bg-[linear-gradient(135deg,#ded6cd,#b8aa9e)] shadow-editorial animate-softFloat dark:bg-[linear-gradient(135deg,#1f1f1f,#4a423c)] dark:shadow-night">
           </div>
-          <div
-            class="absolute left-8 top-36 h-[30rem] w-[17rem] bg-[linear-gradient(160deg,#2f2b28,#8e837b)] opacity-90 shadow-editorial dark:shadow-night transition-all duration-500 ease-out hover:-translate-y-3 hover:rotate-2 hover:scale-105 z-20 hover:z-50">
+          <div style="animation-delay: 1.5s"
+            class="absolute left-8 top-36 h-[30rem] w-[17rem] bg-[linear-gradient(160deg,#2f2b28,#8e837b)] opacity-90 shadow-editorial dark:shadow-night animate-softFloat">
           </div>
-          <div
-            class="absolute right-28 top-28 h-[26rem] w-[18rem] border border-white/60 bg-pearl/45 shadow-soft backdrop-blur-md dark:border-white/10 dark:bg-white/5 transition-all duration-500 ease-out hover:-translate-y-5 hover:scale-110 z-30 hover:z-50">
+          <div style="animation-delay: 0.7s"
+            class="absolute right-28 top-28 h-[26rem] w-[18rem] border border-white/60 bg-pearl/45 shadow-soft backdrop-blur-md dark:border-white/10 dark:bg-white/5 animate-softFloat">
           </div>
-          <div
-            class="absolute bottom-10 right-0 w-[24rem] max-w-[86vw] bg-pearl/80 p-8 shadow-editorial backdrop-blur-xl dark:bg-[#121212]/80 dark:shadow-night transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] z-40 hover:z-50">
+          <div style="animation-delay: 2.2s"
+            class="absolute bottom-10 right-0 w-[24rem] max-w-[86vw] bg-pearl/80 p-8 shadow-editorial backdrop-blur-xl dark:bg-[#121212]/80 dark:shadow-night animate-softFloat">
             <p class="text-sm font-semibold uppercase tracking-[0.28em] text-taupe dark:text-stone-500"
               data-tr="Mühendislik Atmosferi" data-en="Engineering Atmosphere">Mühendislik Atmosferi</p>
             <p class="mt-5 text-lg leading-8 text-cocoa/75 dark:text-stone-400"
