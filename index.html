@@ -401,24 +401,22 @@
     </section>
 
     <section id="innovation-bridge"
-      class="h-screen w-full overflow-hidden relative bg-pearl dark:bg-night flex items-center justify-center">
+      class="h-[80vh] my-12 md:my-24 mx-4 md:mx-8 overflow-hidden relative bg-[#E8E4DD] dark:bg-[#151515] flex items-center justify-center shadow-sm">
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
         <h2 id="dynamic-bg-text"
-          class="font-serif text-[18rem] md:text-[22rem] font-bold tracking-tighter opacity-15 dark:opacity-20 text-ink dark:text-white select-none whitespace-nowrap transition-all duration-500 drop-shadow-2xl">
+          class="font-sans text-[15rem] md:text-[22rem] font-bold tracking-tighter text-[#DCD6CE] dark:text-[#222222] select-none whitespace-nowrap transition-all duration-500">
           INNOVATION
         </h2>
       </div>
 
-      <div class="w-full h-[250vh] relative flex flex-row gap-4 md:gap-12 z-10 justify-evenly items-start opacity-80"
+      <div class="w-full h-[200vh] relative flex flex-row gap-8 md:gap-24 z-10 justify-center items-start px-8 md:px-24"
         id="image-river">
         <!-- Sütun 1 -->
-        <div class="river-col col-up flex flex-col gap-10 md:gap-16 w-1/5 mt-32" id="col-1"></div>
+        <div class="river-col col-up flex flex-col gap-32 md:gap-40 w-1/3 mt-48 items-end" id="col-1"></div>
         <!-- Sütun 2 -->
-        <div class="river-col col-down flex flex-col gap-16 md:gap-24 w-1/5 -mt-32" id="col-2"></div>
+        <div class="river-col col-down flex flex-col gap-40 md:gap-56 w-1/3 -mt-20 items-center" id="col-2"></div>
         <!-- Sütun 3 -->
-        <div class="river-col col-up flex flex-col gap-12 md:gap-20 w-1/5 mt-64" id="col-3"></div>
-        <!-- Sütun 4 -->
-        <div class="river-col col-down flex flex-col gap-14 md:gap-24 w-1/5 -mt-10" id="col-4"></div>
+        <div class="river-col col-up flex flex-col gap-24 md:gap-32 w-1/3 mt-72 items-start" id="col-3"></div>
       </div>
     </section>
 
@@ -908,29 +906,26 @@
     const bridge = document.getElementById("innovation-bridge");
     if (bridge) {
       const imgSets = [
-        ['1530497610245-94d3c16cda28', '1576091160399-112ba8d25d1d', '1583324113626-70df0f4deaab', '1516110833967-0b5716ca1387', '1555949963-aa79dcee981c'],
-        ['1518770660439-4636190af475', '1555664424-778a1e5e1b48', '1580894732444-8ecded7900cd', '1517420704952-d9f39e95b43e', '1498084339585-fb3a00f402f0'],
-        ['1561070791-2526d30994b5', '1512756290469-ec264b7fbf87', '1507238691740-187a5b1d37b8', '1522542767098-df469d12d4d9', '1499951360447-b19be8fe80f5'],
-        ['1635070041078-e363dbe005cb', '1509228468518-180dd4864904', '1550751827-4bd374c3f58b', '1519389953810-c5eaa81512a8', '1504639725590-34d0984388bd']
+        ['1550751827-4bd374c3f58b', '1516110833967-0b5716ca1387', '1517420704952-d9f39e95b43e'],
+        ['1555664424-778a1e5e1b48', '1498084339585-fb3a00f402f0', '1580894732444-8ecded7900cd'],
+        ['1507238691740-187a5b1d37b8', '1522542767098-df469d12d4d9', '1504639725590-34d0984388bd']
       ];
 
-      const widths = ['w-full', 'w-4/5', 'w-11/12', 'w-5/6', 'w-3/4'];
-      const aspects = ['aspect-[4/3]', 'aspect-square', 'aspect-[3/4]', 'aspect-[4/5]', 'aspect-[5/4]'];
-      const rotates = ['rotate-1', '-rotate-2', 'rotate-3', '-rotate-1', 'rotate-0'];
-      const translates = ['translate-x-0', 'translate-x-4', '-translate-x-3', 'translate-x-2', '-translate-x-5'];
+      const widths = ['w-full', 'w-4/5', 'w-3/4'];
+      const aspects = ['aspect-[4/5]', 'aspect-square', 'aspect-[3/4]'];
+      const translates = ['translate-x-0', 'translate-x-8', '-translate-x-8'];
 
       imgSets.forEach((set, index) => {
         const col = document.getElementById(`col-${index + 1}`);
+        if (!col) return;
         let html = '';
-        // Sadece 1 kez dönüyoruz (toplam 5 fotoğraf, karmaşa azaldı)
         set.forEach((id, i) => {
           const w = widths[(i + index) % widths.length];
           const a = aspects[(i * 2 + index) % aspects.length];
-          const r = rotates[(i * 3 + index) % rotates.length];
           const t = translates[(i + index * 2) % translates.length];
 
-          html += `<div class="${w} ${a} ${r} ${t} rounded-2xl backdrop-blur-sm bg-white/20 border border-white/10 dark:bg-black/20 overflow-hidden shadow-lg transition-transform duration-700 hover:scale-105 flex-shrink-0">
-            <img src="https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover opacity-60 mix-blend-overlay dark:mix-blend-screen" />
+          html += `<div class="${w} ${a} ${t} overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02] flex-shrink-0 bg-stone-200 dark:bg-stone-800">
+            <img src="https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" />
           </div>`;
         });
         col.innerHTML = html;
@@ -941,8 +936,8 @@
           trigger: "#innovation-bridge",
           pin: true,
           scrub: 1,
-          start: "top top",
-          end: "+=3000",
+          start: "top 10%",
+          end: "+=2000",
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             const bgText = document.getElementById("dynamic-bg-text");
