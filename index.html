@@ -400,23 +400,25 @@
       </div>
     </section>
 
-    <section id="innovation-bridge" class="h-screen w-full overflow-hidden relative bg-pearl dark:bg-night flex items-center justify-center">
+    <section id="innovation-bridge"
+      class="h-screen w-full overflow-hidden relative bg-pearl dark:bg-night flex items-center justify-center">
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
         <h2 id="dynamic-bg-text"
-          class="font-serif text-[18rem] md:text-[22rem] font-bold tracking-tighter opacity-5 dark:opacity-10 text-ink dark:text-white select-none whitespace-nowrap transition-all duration-500">
+          class="font-serif text-[18rem] md:text-[22rem] font-bold tracking-tighter opacity-15 dark:opacity-20 text-ink dark:text-white select-none whitespace-nowrap transition-all duration-500 drop-shadow-2xl">
           INNOVATION
         </h2>
       </div>
 
-      <div class="w-full relative flex flex-col gap-6 z-10" id="image-river">
-        <!-- Satır 1 -->
-        <div class="river-row row-right flex gap-6 w-max" id="row-1"></div>
-        <!-- Satır 2 -->
-        <div class="river-row row-left flex gap-6 w-max" id="row-2"></div>
-        <!-- Satır 3 -->
-        <div class="river-row row-right flex gap-6 w-max" id="row-3"></div>
-        <!-- Satır 4 -->
-        <div class="river-row row-left flex gap-6 w-max" id="row-4"></div>
+      <div class="w-full h-[250vh] relative flex flex-row gap-4 md:gap-12 z-10 justify-evenly items-start opacity-80"
+        id="image-river">
+        <!-- Sütun 1 -->
+        <div class="river-col col-up flex flex-col gap-10 md:gap-16 w-1/5 mt-32" id="col-1"></div>
+        <!-- Sütun 2 -->
+        <div class="river-col col-down flex flex-col gap-16 md:gap-24 w-1/5 -mt-32" id="col-2"></div>
+        <!-- Sütun 3 -->
+        <div class="river-col col-up flex flex-col gap-12 md:gap-20 w-1/5 mt-64" id="col-3"></div>
+        <!-- Sütun 4 -->
+        <div class="river-col col-down flex flex-col gap-14 md:gap-24 w-1/5 -mt-10" id="col-4"></div>
       </div>
     </section>
 
@@ -912,17 +914,26 @@
         ['1635070041078-e363dbe005cb', '1509228468518-180dd4864904', '1550751827-4bd374c3f58b', '1519389953810-c5eaa81512a8', '1504639725590-34d0984388bd']
       ];
 
+      const widths = ['w-full', 'w-4/5', 'w-11/12', 'w-5/6', 'w-3/4'];
+      const aspects = ['aspect-[4/3]', 'aspect-square', 'aspect-[3/4]', 'aspect-[4/5]', 'aspect-[5/4]'];
+      const rotates = ['rotate-1', '-rotate-2', 'rotate-3', '-rotate-1', 'rotate-0'];
+      const translates = ['translate-x-0', 'translate-x-4', '-translate-x-3', 'translate-x-2', '-translate-x-5'];
+
       imgSets.forEach((set, index) => {
-        const row = document.getElementById(`row-${index + 1}`);
+        const col = document.getElementById(`col-${index + 1}`);
         let html = '';
-        for(let i=0; i<3; i++) {
-          set.forEach(id => {
-            html += `<div class="aspect-[4/3] w-40 md:w-56 h-auto rounded-2xl backdrop-blur-sm bg-white/30 border border-white/10 dark:bg-black/30 overflow-hidden flex-shrink-0 flex items-center justify-center shadow-sm">
-              <img src="https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover opacity-80 mix-blend-overlay dark:mix-blend-screen" />
-            </div>`;
-          });
-        }
-        row.innerHTML = html;
+        // Sadece 1 kez dönüyoruz (toplam 5 fotoğraf, karmaşa azaldı)
+        set.forEach((id, i) => {
+          const w = widths[(i + index) % widths.length];
+          const a = aspects[(i * 2 + index) % aspects.length];
+          const r = rotates[(i * 3 + index) % rotates.length];
+          const t = translates[(i + index * 2) % translates.length];
+
+          html += `<div class="${w} ${a} ${r} ${t} rounded-2xl backdrop-blur-sm bg-white/20 border border-white/10 dark:bg-black/20 overflow-hidden shadow-lg transition-transform duration-700 hover:scale-105 flex-shrink-0">
+            <img src="https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover opacity-60 mix-blend-overlay dark:mix-blend-screen" />
+          </div>`;
+        });
+        col.innerHTML = html;
       });
 
       const tl = gsap.timeline({
@@ -946,11 +957,12 @@
         }
       });
 
-      gsap.set(".row-right", { xPercent: -50 });
-      tl.to(".row-right", { xPercent: 0, ease: "none" }, 0);
+      // Dikey akış ayarları (Sütunlar)
+      gsap.set(".col-up", { yPercent: 15 });
+      tl.to(".col-up", { yPercent: -35, ease: "none" }, 0);
 
-      gsap.set(".row-left", { xPercent: 0 });
-      tl.to(".row-left", { xPercent: -50, ease: "none" }, 0);
+      gsap.set(".col-down", { yPercent: -35 });
+      tl.to(".col-down", { yPercent: 15, ease: "none" }, 0);
     }
   </script>
 </body>
