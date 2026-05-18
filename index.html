@@ -173,7 +173,7 @@
 
 <body class="soft-noise font-sans text-ink antialiased transition-colors duration-500 dark:text-stone-100">
   <header
-    class="fixed top-0 z-50 w-full border-b border-black/5 bg-white/60 backdrop-blur-md transition-colors duration-500 dark:border-white/10 dark:bg-black/60">
+    class="fixed top-0 z-50 w-full border-b border-black/5 bg-white/60 backdrop-blur-sm transition-colors duration-500 dark:border-white/10 dark:bg-black/60 md:backdrop-blur-md">
     <nav
       class="relative mx-auto flex h-24 max-w-7xl items-start justify-between px-5 pt-4 sm:px-8 lg:h-20 lg:items-center lg:px-12 lg:pt-0">
       <button id="langToggle" type="button"
@@ -183,7 +183,7 @@
       </button>
 
       <a href="#home"
-        class="absolute left-1/2 top-0 z-10 flex h-24 w-24 -translate-x-1/2 items-center justify-center rounded-full border border-cocoa/25 bg-pearl/75 shadow-editorial backdrop-blur-md transition-all duration-300 hover:scale-105 dark:border-white/15 dark:bg-[#121212]/80 dark:shadow-night"
+        class="absolute left-1/2 top-0 z-10 flex h-24 w-24 -translate-x-1/2 transform-gpu items-center justify-center rounded-full border border-cocoa/25 bg-pearl/75 shadow-editorial backdrop-blur-sm transition-all duration-300 will-change-transform hover:scale-105 dark:border-white/15 dark:bg-[#121212]/80 dark:shadow-night md:backdrop-blur-md"
         aria-label="Gülbanu Yılmaz ana sayfa">
         <span class="font-serif text-4xl font-semibold tracking-[-0.1em] text-cocoa dark:text-stone-100">GY</span>
       </a>
@@ -263,10 +263,10 @@
             class="absolute left-8 top-36 h-[30rem] w-[17rem] bg-[linear-gradient(160deg,#2f2b28,#8e837b)] opacity-90 shadow-editorial dark:shadow-night animate-softFloat">
           </div>
           <div style="animation-delay: 0.7s"
-            class="absolute right-28 top-28 h-[26rem] w-[18rem] border border-white/60 bg-pearl/45 shadow-soft backdrop-blur-md dark:border-white/10 dark:bg-white/5 animate-softFloat">
+            class="absolute right-28 top-28 h-[26rem] w-[18rem] transform-gpu border border-white/60 bg-pearl/45 shadow-soft backdrop-blur-sm will-change-transform dark:border-white/10 dark:bg-white/5 md:backdrop-blur-md animate-softFloat">
           </div>
           <div style="animation-delay: 2.2s"
-            class="absolute bottom-10 right-0 w-[24rem] max-w-[86vw] bg-pearl/80 p-8 shadow-editorial backdrop-blur-xl dark:bg-[#121212]/80 dark:shadow-night animate-softFloat">
+            class="absolute bottom-10 right-0 w-[24rem] max-w-[86vw] transform-gpu bg-pearl/80 p-8 shadow-editorial backdrop-blur-sm will-change-transform dark:bg-[#121212]/80 dark:shadow-night md:backdrop-blur-xl animate-softFloat">
             <p class="text-sm font-semibold uppercase tracking-[0.28em] text-taupe dark:text-stone-500"
               data-tr="Mühendislik Atmosferi" data-en="Engineering Atmosphere">Mühendislik Atmosferi</p>
             <p class="mt-5 text-lg leading-8 text-cocoa/75 dark:text-stone-400"
@@ -412,11 +412,11 @@
       <div class="w-full h-[200vh] relative flex flex-row gap-8 md:gap-24 z-10 justify-center items-start px-8 md:px-24"
         id="image-river">
         <!-- Sütun 1 -->
-        <div class="river-col col-up flex flex-col gap-32 md:gap-40 w-1/4 mt-48 items-end" id="col-1"></div>
+        <div class="river-col col-up flex flex-col gap-32 md:gap-40 w-1/4 mt-48 transform-gpu items-end will-change-transform" id="col-1"></div>
         <!-- Sütun 2 -->
-        <div class="river-col col-down flex flex-col gap-40 md:gap-56 w-1/4 -mt-20 items-center" id="col-2"></div>
+        <div class="river-col col-down flex flex-col gap-40 md:gap-56 w-1/4 -mt-20 transform-gpu items-center will-change-transform" id="col-2"></div>
         <!-- Sütun 3 -->
-        <div class="river-col col-up flex flex-col gap-24 md:gap-32 w-1/4 mt-72 items-start" id="col-3"></div>
+        <div class="river-col col-up flex flex-col gap-24 md:gap-32 w-1/4 mt-72 transform-gpu items-start will-change-transform" id="col-3"></div>
       </div>
     </section>
 
@@ -612,7 +612,7 @@
         </div>
 
         <form action="https://formspree.io/f/xdabblor" method="POST"
-          class="rounded-[2rem] border border-cocoa/10 bg-pearl/75 p-8 shadow-editorial backdrop-blur-md transition-colors duration-500 dark:border-gray-700 dark:bg-[#1a1a1a] dark:shadow-night sm:p-10">
+          class="rounded-[2rem] border border-cocoa/10 bg-pearl/75 p-8 shadow-editorial backdrop-blur-sm transition-colors duration-500 dark:border-gray-700 dark:bg-[#1a1a1a] dark:shadow-night sm:p-10 md:backdrop-blur-md">
           <div class="grid gap-5 sm:grid-cols-2">
             <label>
               <span class="mb-2 block text-sm font-medium uppercase tracking-[0.16em] text-taupe dark:text-stone-500"
@@ -770,11 +770,15 @@
 
       const rect = intricateCanvas.getBoundingClientRect();
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const isMobile = window.innerWidth < 768;
       intricateCanvas.width = Math.floor(rect.width * ratio);
       intricateCanvas.height = Math.floor(rect.height * ratio);
       intricateContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+      intricateContext.imageSmoothingEnabled = false;
 
-      const count = Math.min(12000, Math.max(5000, Math.floor((rect.width * rect.height) / 52)));
+      const count = isMobile
+        ? Math.min(1500, Math.floor((rect.width * rect.height) / 120))
+        : Math.min(5000, Math.floor((rect.width * rect.height) / 70));
       intricateParticles = Array.from({ length: count }, (_, index) => {
         const scatteredX = Math.random() * rect.width;
         const scatteredY = Math.random() * rect.height;
@@ -895,6 +899,7 @@
     if (intricateCanvas && intricateContext) {
       syncIntricateCanvas();
       intricateFrame = requestAnimationFrame(renderIntricateParticles);
+      let intricateResizeTimer;
 
       intricateCanvas.addEventListener("pointermove", (event) => {
         const rect = intricateCanvas.getBoundingClientRect();
@@ -908,15 +913,19 @@
       });
 
       window.addEventListener("resize", () => {
-        cancelAnimationFrame(intricateFrame);
-        syncIntricateCanvas();
-        intricateStart = performance.now();
-        intricateFrame = requestAnimationFrame(renderIntricateParticles);
+        clearTimeout(intricateResizeTimer);
+        intricateResizeTimer = setTimeout(() => {
+          cancelAnimationFrame(intricateFrame);
+          syncIntricateCanvas();
+          intricateStart = performance.now();
+          intricateFrame = requestAnimationFrame(renderIntricateParticles);
+        }, 200);
       });
     }
   </script>
   <script>
     gsap.registerPlugin(ScrollTrigger);
+    gsap.defaults({ force3D: true });
 
     const bridge = document.getElementById("innovation-bridge");
     if (bridge) {
@@ -939,8 +948,8 @@
           const a = aspects[(i * 2 + index) % aspects.length];
           const t = translates[(i + index * 2) % translates.length];
 
-          html += `<div class="${w} ${a} ${t} overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02] flex-shrink-0 bg-stone-200 dark:bg-stone-800">
-            <img src="https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" />
+          html += `<div class="${w} ${a} ${t} overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02] flex-shrink-0 transform-gpu will-change-transform bg-stone-200 dark:bg-stone-800">
+            <img src="https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transform-gpu will-change-transform" />
           </div>`;
         });
         col.innerHTML = html;
@@ -953,6 +962,7 @@
           scrub: 1,
           start: "top 10%",
           end: "+=2000",
+          anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             const bgText = document.getElementById("dynamic-bg-text");
