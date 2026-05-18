@@ -175,17 +175,17 @@
   <header
     class="fixed top-0 z-50 w-full border-b border-black/5 bg-white/60 backdrop-blur-sm transition-colors duration-500 dark:border-white/10 dark:bg-black/60 md:backdrop-blur-md">
     <nav
-      class="relative mx-auto flex h-24 max-w-7xl items-start justify-between px-5 pt-4 sm:px-8 lg:h-20 lg:items-center lg:px-12 lg:pt-0">
+      class="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-8 lg:h-24">
       <button id="langToggle" type="button"
-        class="h-11 rounded-full border px-5 text-[11px] font-bold uppercase tracking-[0.15em] transition-all duration-500 hover:-translate-y-0.5 shadow-sm flex items-center justify-center whitespace-nowrap"
+        class="h-9 rounded-full border px-3 text-[9px] font-bold uppercase tracking-[0.15em] transition-all duration-500 hover:-translate-y-0.5 shadow-sm flex items-center justify-center whitespace-nowrap sm:h-11 sm:px-5 sm:text-[11px]"
         aria-label="Dil değiştir">
-        TR <span class="ml-1 mr-1">🇹🇷</span> / EN
+        TR / EN
       </button>
 
       <a href="#home"
-        class="absolute left-1/2 top-0 z-10 flex h-24 w-24 -translate-x-1/2 transform-gpu items-center justify-center rounded-full border border-cocoa/25 bg-pearl/75 shadow-editorial backdrop-blur-sm transition-all duration-300 will-change-transform hover:scale-105 dark:border-white/15 dark:bg-[#121212]/80 dark:shadow-night md:backdrop-blur-md"
+        class="absolute left-1/2 top-2 lg:top-0 z-10 flex h-16 w-16 lg:h-24 lg:w-24 -translate-x-1/2 items-center justify-center rounded-full border border-cocoa/25 bg-pearl/75 shadow-editorial backdrop-blur-md transition-all duration-300 hover:scale-105 dark:border-white/15 dark:bg-[#121212]/80 dark:shadow-night"
         aria-label="Gülbanu Yılmaz ana sayfa">
-        <span class="font-serif text-4xl font-semibold tracking-[-0.1em] text-cocoa dark:text-stone-100">GY</span>
+        <span class="font-serif text-2xl lg:text-4xl font-semibold tracking-[-0.1em] text-cocoa dark:text-stone-100">GY</span>
       </a>
 
       <div
@@ -209,7 +209,7 @@
       </div>
 
       <button id="themeToggle" type="button"
-        class="grid h-11 w-11 place-items-center rounded-full border border-black/10 bg-white/50 text-cocoa transition hover:-translate-y-0.5 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10"
+        class="grid h-9 w-9 place-items-center rounded-full border border-black/10 bg-white/50 text-cocoa transition hover:-translate-y-0.5 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10 sm:h-11 sm:w-11"
         aria-label="Toggle dark mode">
         <svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -688,16 +688,16 @@
         item.placeholder = item.dataset[`placeholder${lang.charAt(0).toUpperCase() + lang.slice(1)}`];
       });
 
-      // Buton metni her zaman sabit: TR 🇹🇷 / EN
-      langToggle.innerHTML = 'TR <span class="ml-1 mr-1">🇹🇷</span> / EN';
+      // Buton metni her platformda stabil görünmesi için emoji kullanmadan sabit kalır
+      langToggle.textContent = "TR / EN";
 
       // Aktif dile göre sadece butonun renklerini değiştiriyoruz
       if (lang === "tr") {
         // TÜRKÇE SEÇİLİ (Açık Renk Buton)
-        langToggle.className = "h-11 rounded-full border border-cocoa/20 bg-pearl text-cocoa px-5 text-[11px] font-bold uppercase tracking-[0.15em] transition-all duration-500 hover:-translate-y-0.5 hover:bg-white dark:bg-white/10 dark:text-stone-100 dark:border-white/10 shadow-sm flex items-center justify-center whitespace-nowrap";
+        langToggle.className = "h-9 rounded-full border border-cocoa/20 bg-pearl text-cocoa px-3 text-[9px] font-bold uppercase tracking-[0.15em] transition-all duration-500 hover:-translate-y-0.5 hover:bg-white dark:bg-white/10 dark:text-stone-100 dark:border-white/10 shadow-sm flex items-center justify-center whitespace-nowrap sm:h-11 sm:px-5 sm:text-[11px]";
       } else {
         // İNGİLİZCE SEÇİLİ (Koyu Renk Buton)
-        langToggle.className = "h-11 rounded-full border border-ink bg-ink text-pearl px-5 text-[11px] font-bold uppercase tracking-[0.15em] transition-all duration-500 hover:-translate-y-0.5 hover:bg-cocoa dark:bg-black dark:text-stone-100 dark:border-stone-700 shadow-sm flex items-center justify-center whitespace-nowrap";
+        langToggle.className = "h-9 rounded-full border border-ink bg-ink text-pearl px-3 text-[9px] font-bold uppercase tracking-[0.15em] transition-all duration-500 hover:-translate-y-0.5 hover:bg-cocoa dark:bg-black dark:text-stone-100 dark:border-stone-700 shadow-sm flex items-center justify-center whitespace-nowrap sm:h-11 sm:px-5 sm:text-[11px]";
       }
 
       localStorage.setItem("lang", lang);
@@ -930,9 +930,9 @@
     const bridge = document.getElementById("innovation-bridge");
     if (bridge) {
       const imgSets = [
-        ['1497215968147-3914a516086d', '1518770660439-4636190af475', '1486406146926-c627a92ad1ab'],
-        ['1555664424-778a1e5e1b48', '1531297172867-27e1d52033c4', '1591370874773-6702e8f12fdce'],
-        ['1507238691740-187a5b1d37b8', '1499951360447-b19be8fe80f5', '1504639725590-34d0984388bd']
+        ['bilgisayar1.jpg', 'esp-1.jpg', 'matlab1.jpg', 'sema1.jpg'],
+        ['bilgisayar2.jpg', 'matlab2.jpg', 'matlab3.jpg', 'resim1.jpg'],
+        ['espwroom32.jpg', 'matlab4.jpg', 'sema2.jpg']
       ];
 
       const widths = ['w-5/6', 'w-4/5', 'w-3/4'];
@@ -948,8 +948,8 @@
           const a = aspects[(i * 2 + index) % aspects.length];
           const t = translates[(i + index * 2) % translates.length];
 
-          html += `<div class="${w} ${a} ${t} overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02] flex-shrink-0 transform-gpu will-change-transform bg-stone-200 dark:bg-stone-800">
-            <img src="https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transform-gpu will-change-transform" />
+          html += `<div class="${w} ${a} ${t} overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02] flex-shrink-0 bg-stone-200 dark:bg-stone-800">
+            <img src="./assets/${id}" class="w-full h-full object-cover" loading="lazy" alt="Mühendislik Görseli" />
           </div>`;
         });
         col.innerHTML = html;
