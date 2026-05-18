@@ -409,13 +409,13 @@
         </h2>
       </div>
 
-      <div class="w-full h-[200vh] relative flex flex-row gap-2 md:gap-24 z-10 justify-center items-start px-2 md:px-24" id="image-river">
+      <div class="w-full h-[140vh] md:h-[200vh] relative flex flex-row gap-3 md:gap-24 z-10 justify-center items-start px-2 md:px-24" id="image-river">
         <!-- Sütun 1 -->
-        <div class="river-col col-up flex flex-col gap-12 md:gap-40 w-[32%] md:w-1/4 mt-32 md:mt-48 items-end" id="col-1"></div>
+        <div class="river-col col-up flex flex-col gap-20 md:gap-40 w-[32%] md:w-1/4 mt-16 md:mt-48 items-center" id="col-1"></div>
         <!-- Sütun 2 -->
-        <div class="river-col col-down flex flex-col gap-16 md:gap-56 w-[32%] md:w-1/4 -mt-10 md:-mt-20 items-center" id="col-2"></div>
+        <div class="river-col col-down flex flex-col gap-28 md:gap-56 w-[32%] md:w-1/4 -mt-5 md:-mt-20 items-center" id="col-2"></div>
         <!-- Sütun 3 -->
-        <div class="river-col col-up flex flex-col gap-10 md:gap-32 w-[32%] md:w-1/4 mt-48 md:mt-72 items-start" id="col-3"></div>
+        <div class="river-col col-up flex flex-col gap-16 md:gap-32 w-[32%] md:w-1/4 mt-28 md:mt-72 items-center" id="col-3"></div>
       </div>
     </section>
 
@@ -933,9 +933,9 @@
         ['espwroom32.jpg', 'matlab4.jpg', 'sema2.jpg']
       ];
 
-      const widths = ['w-[95%] md:w-5/6', 'w-full md:w-4/5', 'w-[90%] md:w-3/4'];
+      const widths = ['w-full', 'w-11/12', 'w-[95%]'];
       const aspects = ['aspect-[4/5]', 'aspect-square', 'aspect-[3/4]'];
-      const translates = ['translate-x-0', 'translate-x-8', '-translate-x-8'];
+      const translates = ['translate-x-0', 'md:translate-x-8', 'md:-translate-x-8'];
 
       imgSets.forEach((set, index) => {
         const col = document.getElementById(`col-${index + 1}`);
@@ -959,7 +959,7 @@
           pin: true,
           scrub: 1,
           start: "top 10%",
-          end: "+=2000",
+          end: window.innerWidth < 768 ? "+=1000" : "+=2000",
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
