@@ -177,9 +177,9 @@
     <nav
       class="relative mx-auto flex h-24 max-w-7xl items-start justify-between px-5 pt-4 sm:px-8 lg:h-20 lg:items-center lg:px-12 lg:pt-0">
       <button id="langToggle" type="button"
-        class="h-11 rounded-full border border-black/10 bg-white/50 px-4 text-xs font-bold uppercase tracking-[0.2em] text-cocoa transition hover:-translate-y-0.5 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10"
+        class="h-11 rounded-full border px-5 text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
         aria-label="Dil değiştir">
-        TR / EN
+        TR 🇹🇷
       </button>
 
       <a href="#home"
@@ -679,12 +679,28 @@
 
     function setLanguage(lang) {
       document.documentElement.lang = lang;
+      
+      // Sayfadaki metinleri değiştirir
       translatable.forEach((item) => {
         item.textContent = item.dataset[lang];
       });
+      
+      // Form placeholder'larını değiştirir
       placeholderItems.forEach((item) => {
         item.placeholder = item.dataset[`placeholder${lang.charAt(0).toUpperCase() + lang.slice(1)}`];
       });
+
+      // Aktif dile göre Buton Metni ve Renk Kombinasyonu Değişimi
+      if (lang === "tr") {
+        // Türkçe aktifken: Kahve (cocoa) arka plan ve Türk Bayrağı
+        langToggle.innerHTML = 'TR <span class="ml-1">🇹🇷</span>';
+        langToggle.className = "h-11 rounded-full border border-cocoa bg-cocoa text-pearl px-5 text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-ink hover:border-ink dark:bg-stone-100 dark:text-night dark:border-stone-100 dark:hover:bg-stone-200 shadow-sm";
+      } else {
+        // İngilizce aktifken: Vizon/Gri (taupe) arka plan ve SADECE "EN" metni
+        langToggle.innerHTML = 'EN';
+        langToggle.className = "h-11 rounded-full border border-taupe bg-taupe text-pearl px-5 text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-cocoa hover:border-cocoa dark:bg-stone-800 dark:text-stone-100 dark:border-stone-700 dark:hover:bg-stone-700 shadow-sm";
+      }
+
       localStorage.setItem("lang", lang);
     }
 
